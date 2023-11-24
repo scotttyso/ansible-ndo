@@ -1,0 +1,22 @@
+all:
+  vars:
+    ansible_command_timeout: 1000
+    ansible_connect_timeout: 1000
+    ansible_connection: ansible.netcommon.httpapi
+    ansible_httpapi_validate_certs: false
+    ansible_httpapi_use_ssl: true
+    ansible_python_interpreter: "/usr/bin/env python3"
+    ansible_user: "admin"
+    schema: RICH
+    template: RICH
+    tenant: RICH
+    vrf: RICH
+    bridge_domains:
+      - application_profile: nets
+        description: VLAN103
+        name: 198.18.103.0
+  children:
+    ndo:
+      hosts:
+        odin-nd01.rich.ciscolabs.com:
+           ansible_network_os: cisco.nd.nd

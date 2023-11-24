@@ -1,0 +1,41 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Update Bridge Domains
+      collections:
+        - cisco.mso
+      loop: "{{ bridge_domains }}"
+      mso_schema_template_bd:
+        # Host Settings
+        output_level: info
+        password: "{{ lookup('ansible.builtin.env', 'ndo_password') }}"
+        validate_certs: false
+        # Bridge Domain Settings
+        bd: "{{ item.name }}"
+        description: "{{ item.description }}"
+        display_name: "{{ item.name }}:{{ item.description }}"
+        schema: "{{ schema }}"
+        state: present
+        template: "{{ template }}"
+        vrf:
+          name: "{{ vrf }}"
+    - name: Update Application EPGs
+      collections:
+        - cisco.mso
+      loop: "{{ bridge_domains }}"
+      mso_schema_template_anp_epg:
+        # Host Settings
+        output_level: info
+        password: "{{ lookup('ansible.builtin.env', 'ndo_password') }}"
+        validate_certs: false
+        # Application Endpoint Group Settings
+        anp: "{{ item.application_profile }}"
+        bd:
+          name: "{{ item.name }}"
+        description: "{{ item.description }}"
+        display_name: "{{ item.name }}:{{ item.description }}"
+        epg: "{{ item.name }}"
+        schema: "{{ schema }}"
+        state: present
+        template: "{{ template }}"
