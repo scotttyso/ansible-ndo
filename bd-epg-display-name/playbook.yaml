@@ -5,7 +5,7 @@
     - name: Update Bridge Domains
       collections:
         - cisco.mso
-      loop: "{{ bridge_domains }}"
+      loop: "{{ application_epgs }}"
       mso_schema_template_bd:
         # Host Settings
         output_level: info
@@ -23,7 +23,7 @@
     - name: Update Application EPGs
       collections:
         - cisco.mso
-      loop: "{{ bridge_domains }}"
+      loop: "{{ application_epgs }}"
       mso_schema_template_anp_epg:
         # Host Settings
         output_level: info

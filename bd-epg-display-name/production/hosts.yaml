@@ -9,9 +9,8 @@ all:
     ansible_user: "admin"
     schema: RICH
     template: RICH
-    tenant: RICH
     vrf: RICH
-    bridge_domains:
+    application_epgs:
       - application_profile: nets
         description: VLAN103
         name: 198.18.103.0
