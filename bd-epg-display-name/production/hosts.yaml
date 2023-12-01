@@ -9,7 +9,10 @@ all:
     ansible_user: "admin"
     schema: RICH
     template: RICH
-    vrf: RICH
+    vrf:
+      name: RICH
+      schema: common
+      template: common
     application_epgs:
       - application_profile: nets
         description: VLAN103

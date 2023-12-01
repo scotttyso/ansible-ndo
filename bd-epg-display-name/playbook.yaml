@@ -19,7 +19,9 @@
         state: present
         template: "{{ template }}"
         vrf:
-          name: "{{ vrf }}"
+          name: "{{ vrf.name }}"
+          schema: "{{ vrf.schema }}"
+          template: "{{ vrf.template }}"
     - name: Update Application EPGs
       collections:
         - cisco.mso
